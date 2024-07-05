@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true,
     
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx/dom"
+    "jsxImportSource": "hono/jsx"
   },
   "include": ["src"]
 }
