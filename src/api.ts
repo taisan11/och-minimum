@@ -18,7 +18,7 @@ app.get("/th/:thid", async(c) => {
     return c.json(result);
 })
 app.post("/th", async(c) => {
-    const now = (new Date().getTime() / 1000.0).toString()
+    const now = Math.floor(new Date().getTime()/1000).toString()
     const body = await c.req.json();
     const thid = now;
     const name = body.name;
@@ -37,7 +37,7 @@ app.post("/th/:thid", async(c) => {
     const message = body.message;
     const resnum = await db.select().from(res).where(eq(res.thid, thid)).orderBy(desc(res.resnum)).limit(1);
     const resid = thid + (resnum[0].resnum + 1).toString();
-    const created = (new Date().getTime() / 1000.0).toString();
+    const created = Math.floor(new Date().getTime()/1000).toString()
     await db.insert(res).values({resid, thid, resnum:resnum[0].resnum + 1, name, message});
     await db.update(th).set({postnum:resnum[0].resnum + 1, updated:created}).where(eq(th.thid, thid));
     return c.text("ok");
